@@ -25,7 +25,10 @@ public class GenericsApplication {
         stringList.add("E");
         stringList.add("F");
         stringList.add("G");
-
+        CustomList<String> stringCustomList = new CustomList<>();
+        stringCustomList.setList(stringList);
+        stringCustomList.getList().forEach(System.out::println);
+        /*....................................*/
         List<Integer> integerList = new ArrayList<>();
         integerList.add(1);
         integerList.add(2);
@@ -34,11 +37,6 @@ public class GenericsApplication {
         integerList.add(21);
         integerList.add(244);
         integerList.add(22);
-
-        CustomList<String> stringCustomList = new CustomList<>();
-        stringCustomList.setList(stringList);
-        stringCustomList.getList().forEach(System.out::println);
-
         CustomList<Integer> integerCustomList = new CustomList<>();
         integerCustomList.setList(integerList);
         AtomicReference<Integer> integer = new AtomicReference<>(0);
@@ -47,10 +45,39 @@ public class GenericsApplication {
         }
         System.out.println(integer);
 
-
+        /*....................................*/
         CustomClass<String, String> customClass = new CustomClass<>("Name", "Rakib");
         System.out.println(customClass);
 
+
+        /*....................................*/
+        List<Double> list = new ArrayList<>();
+        list.add(1.2);
+        list.add(1.2);
+        list.add(1.2);
+        System.out.println(sumOfArr(list));
+
+    }
+
+    /*-------------------Upper Bounded------------------*/
+    public static double sumOfArr(List<? extends Number> list) {
+        double sum = 0.0;
+        for (Number i : list) {
+            sum = (double) (sum + i.doubleValue());
+        }
+        return sum;
+    }
+    /*-------------------Lower Bounded------------------*/
+    public static double sumOfAddArr(List<? super Double> list) {
+        double sum = 0.0;
+        for (Object i : list) {
+            sum = (double)i +sum;
+        }
+        return sum;
+    }
+
+    /*-------------------Unbounded------------------*/
+    public static void sumOfData(List<?> list) {
     }
 
 }
